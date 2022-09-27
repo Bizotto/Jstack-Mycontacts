@@ -1,23 +1,42 @@
+const ContactsRepository = require('../repositories/contactRepository');
+
 class ContactController {
-  index(request, response) {
-    // listar
-    response.send('send from contact controller');
+  async index(request, response) {
+    const contacts = await ContactsRepository.findAll();
+    response.json(contacts);
   }
 
-  show() {
-    // obter um
+  async show(request, response) {
+    const { id } = request.params;
+
+    const contact = await ContactsRepository.findById(id);
+
+    if (!contact) {
+      return response.status(404).json({ error: 'User not found' });
+    }
+    response.json(contact);
   }
 
   store() {
-    // criar novo
+    // criar novo registro
   }
 
   update() {
-    // editar um
+    // editar um registro
   }
 
-  delete() {
-    // deletar UM
+  async delete(request, response) {
+    const { id } = request.params;
+
+    const contact = await ContactsRepository.findById(id);
+
+    if (!contact) {
+      return response.status(404).json({ error: 'User not found' });
+    }
+
+    await ContactsRepository.delete(id);
+
+    response.sendStatus(204);
   }
 }
 

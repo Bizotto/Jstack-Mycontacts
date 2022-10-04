@@ -43,6 +43,42 @@ class contactsRepository {
       resolve();
     });
   }
+
+  findByEmail(email) {
+    return new Promise((resolve) => {
+      resolve(contacts.find((contact) => contact.email === email));
+    });
+  }
+
+  create({ email, name, phone, category_id }) {
+    return new Promise((resolve) => {
+      const newContact = {
+        id: v4(),
+        email,
+        name,
+        phone,
+        category_id,
+      };
+      contacts.push(newContact);
+      resolve(newContact);
+    });
+  }
+
+  update(id, { email, name, phone, category_id }) {
+    return new Promise((resolve) => {
+      const updateContact = {
+        id,
+        email,
+        name,
+        phone,
+        category_id,
+      };
+      contacts = contacts.map((contact) =>
+        contact.id === id ? updateContact : contact,
+      );
+      resolve(updateContact);
+    });
+  }
 }
 
 module.exports = new contactsRepository();

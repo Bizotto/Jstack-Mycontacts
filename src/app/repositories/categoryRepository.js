@@ -1,6 +1,6 @@
 const db = require('../../database');
 
-class categoryRepository {
+class CategoryRepository {
   async findAll() {
     const rows = await db.query('SELECT * FROM categories ORDER BY name');
     return rows;
@@ -45,4 +45,4 @@ class categoryRepository {
     return row;
   }
 }
-module.exports = new categoryRepository();
+module.exports = new CategoryRepository();

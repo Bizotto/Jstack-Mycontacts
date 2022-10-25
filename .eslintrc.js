@@ -4,13 +4,15 @@ module.exports = {
     commonjs: true,
     es2021: true,
   },
-  extends: 'airbnb-base',
+  extends: 'standard',
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
   },
   rules: {
-    quotes: '',
-    'class-methods-use-this': 'off',
+    semi: 'off',
+    'comma-dangle': 'off',
+    'space-before-function-paren': 'off',
+    camelcase: 'off',
   },
 };
